@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Stephanie Gervasi, PhD</title>
+    <link>/post/</link>
+    <description>Recent content in Posts on Stephanie Gervasi, PhD</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Wed, 14 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Beautiful Plots with the &#39;alluvial&#39; Package</title>
+      <link>/post/alluvial/</link>
+      <pubDate>Wed, 14 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/alluvial/</guid>
+      <description>I love communicating science and I am excited about the ways that data visualizations can engage scientists and non-scientist in discussion, brainstorming, and in the creation of new ideas and hypotheses. Last week in R-club (more about that later) we reviwed the Kaggle Kernel created by Martin Henze (AKA Teads or Tails) for the NY Taxi ETA Kaggle Competition (https://www.kaggle.com/headsortails/nyc-taxi-eda-update-the-fast-the-curious). It was AMAZING (more reading here: http://blog.kaggle.com/2018/06/19/tales-from-my-first-year-inside-the-head-of-a-recent-kaggle-addict/). One of the packages used in this competition that I had never heard of is ‘alluvial’.</description>
+    </item>
+    
+    <item>
+      <title>Hello world!</title>
+      <link>/post/hello-world/</link>
+      <pubDate>Wed, 14 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/hello-world/</guid>
+      <description>This is my first time using the R &amp;lsquo;blogdown&amp;rsquo; package to create a personal website. The next few months of my life will be full of BIG changes as I transition from academia to a fellowship in Data Science. My new blogdown website will chronicle the new and exciting things I learn along the way!
+Below is a photo that I took of a paraglider (one of many that we saw that day) looking down over Monte Cucco Regional Park, located along the border of Umbria and the Le Marche region in Italy.</description>
+    </item>
+    
+    <item>
+      <title>Hello R Markdown</title>
+      <link>/post/2015-07-23-r-rmarkdown/</link>
+      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      
+      <guid>/post/2015-07-23-r-rmarkdown/</guid>
+      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+You can embed an R code chunk like this:
+summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
+    </item>
+    
+  </channel>
+</rss>

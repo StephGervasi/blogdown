@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 3.1.1">
+  <meta name="generator" content="Hugo 0.51" />
+  <meta name="author" content="Stephanie Gervasi">
+
+  
+  
+  
+  
+    
+  
+  <meta name="description" content="I love communicating science and I am excited about the ways that data visualizations can engage scientists and non-scientist in discussion, brainstorming, and in the creation of new ideas and hypotheses. Last week in R-club (more about that later) we reviwed the Kaggle Kernel created by Martin Henze (AKA Teads or Tails) for the NY Taxi ETA Kaggle Competition (https://www.kaggle.com/headsortails/nyc-taxi-eda-update-the-fast-the-curious). It was AMAZING (more reading here: http://blog.kaggle.com/2018/06/19/tales-from-my-first-year-inside-the-head-of-a-recent-kaggle-addict/). One of the packages used in this competition that I had never heard of is ‘alluvial’.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/alluvial/">
+
+  
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous">
+        
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+  
+  
+
+  
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Stephanie Gervasi, PhD">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Stephanie Gervasi, PhD">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/alluvial/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@StephGervasi">
+  <meta property="twitter:creator" content="@StephGervasi">
+  
+  <meta property="og:site_name" content="Stephanie Gervasi, PhD">
+  <meta property="og:url" content="/post/alluvial/">
+  <meta property="og:title" content="Beautiful Plots with the &#39;alluvial&#39; Package | Stephanie Gervasi, PhD">
+  <meta property="og:description" content="I love communicating science and I am excited about the ways that data visualizations can engage scientists and non-scientist in discussion, brainstorming, and in the creation of new ideas and hypotheses. Last week in R-club (more about that later) we reviwed the Kaggle Kernel created by Martin Henze (AKA Teads or Tails) for the NY Taxi ETA Kaggle Competition (https://www.kaggle.com/headsortails/nyc-taxi-eda-update-the-fast-the-curious). It was AMAZING (more reading here: http://blog.kaggle.com/2018/06/19/tales-from-my-first-year-inside-the-head-of-a-recent-kaggle-addict/). One of the packages used in this competition that I had never heard of is ‘alluvial’.">
+  
+  
+    
+  <meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2018-11-14T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2018-11-14T00:00:00&#43;00:00">
+  
+
+  
+
+  
+
+  <title>Beautiful Plots with the &#39;alluvial&#39; Package | Stephanie Gervasi, PhD</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">Stephanie Gervasi, PhD</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#publications_selected">
+            
+            <span>Publications</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Beautiful Plots with the &#39;alluvial&#39; Package</h1>
+
+  
+
+  
+    
+
+<div class="article-metadata">
+
+  
+  
+  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Stephanie Gervasi">
+  </span>
+  
+
+  <span class="article-date">
+    
+    <meta content="2018-11-14 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+    <time datetime="2018-11-14 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+      Nov 14, 2018
+    </time>
+  </span>
+  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Stephanie Gervasi">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    4 min read
+  </span>
+  
+
+  
+  
+
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Beautiful%20Plots%20with%20the%20%27alluvial%27%20Package&amp;url=%2fpost%2falluvial%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2falluvial%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2falluvial%2f&amp;title=Beautiful%20Plots%20with%20the%20%27alluvial%27%20Package"
+         target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2falluvial%2f&amp;title=Beautiful%20Plots%20with%20the%20%27alluvial%27%20Package"
+         target="_blank" rel="noopener">
+        <i class="fab fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Beautiful%20Plots%20with%20the%20%27alluvial%27%20Package&amp;body=%2fpost%2falluvial%2f">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+
+<div id="i-love-communicating-science-and-i-am-excited-about-the-ways-that-data-visualizations-can-engage-scientists-and-non-scientist-in-discussion-brainstorming-and-in-the-creation-of-new-ideas-and-hypotheses.-last-week-in-r-club-more-about-that-later-we-reviwed-the-kaggle-kernel-created-by-martin-henze-aka-teads-or-tails-for-the-ny-taxi-eta-kaggle-competition-httpswww.kaggle.comheadsortailsnyc-taxi-eda-update-the-fast-the-curious.-it-was-amazing-more-reading-here-httpblog.kaggle.com20180619tales-from-my-first-year-inside-the-head-of-a-recent-kaggle-addict.-one-of-the-packages-used-in-this-competition-that-i-had-never-heard-of-is-alluvial." class="section level7">
+<p>I love communicating science and I am excited about the ways that data visualizations can engage scientists and non-scientist in discussion, brainstorming, and in the creation of new ideas and hypotheses. Last week in R-club (more about that later) we reviwed the Kaggle Kernel created by Martin Henze (AKA Teads or Tails) for the NY Taxi ETA Kaggle Competition (<a href="https://www.kaggle.com/headsortails/nyc-taxi-eda-update-the-fast-the-curious" class="uri">https://www.kaggle.com/headsortails/nyc-taxi-eda-update-the-fast-the-curious</a>). It was AMAZING (more reading here: <a href="http://blog.kaggle.com/2018/06/19/tales-from-my-first-year-inside-the-head-of-a-recent-kaggle-addict/" class="uri">http://blog.kaggle.com/2018/06/19/tales-from-my-first-year-inside-the-head-of-a-recent-kaggle-addict/</a>). One of the packages used in this competition that I had never heard of is ‘alluvial’.</p>
+</div>
+<div id="alluvial-is-a-package-in-r-that-allows-the-user-to-make-highly-discriptive-data-pictures-with-a-group-of-categorical-variables.-i-wanted-to-see-if-i-could-get-some-data-to-make-a-similar-plot.-i-used-the-mlbench-package-in-r-and-the-breastcancer-data-set-specifically-mlbench-is-awesome-because-its-a-collection-of-machine-learning-benchmark-problems." class="section level7">
+<p>Alluvial is a package in R that allows the user to make highly discriptive “data pictures” with a group of categorical variables. I wanted to see if I could get some data to make a similar plot. I used the ‘mlbench’ package in R and the BreastCancer data set, specifically (mlbench is awesome because it’s a collection of ‘machine learning benchmark problems’).</p>
+</div>
+<div id="this-is-the-helpful-resource-authored-by-michal-bojanowski-that-guided-me-through-the-final-plotting-steps-httpscran.r-project.orgwebpackagesalluvialvignettesalluvial.html" class="section level7">
+<p>This is the helpful resource, authored by Michal Bojanowski, that guided me through the final plotting steps: <a href="https://cran.r-project.org/web/packages/alluvial/vignettes/alluvial.html" class="uri">https://cran.r-project.org/web/packages/alluvial/vignettes/alluvial.html</a></p>
+</div>
+<div id="getting-set-up" class="section level4">
+<h4>Getting set up:</h4>
+<pre class="r"><code>install.packages(&quot;mlbench&quot;, repos = &quot;http://cran.us.r-project.org&quot;) # machine learning data sets free for exploration
+install.packages(&quot;tidyverse&quot;, repos = &quot;http://cran.us.r-project.org&quot;) # for some helpful transformations performed on the data set
+install.packages (&quot;alluvial&quot;, repos = &quot;http://cran.us.r-project.org&quot;) # for the beautiful plot
+library(mlbench)
+library(tidyverse)
+library(alluvial)
+data(BreastCancer)
+dim(BreastCancer) 
+str(BreastCancer)</code></pre>
+</div>
+<div id="checking-some-variables-of-interest-for-plotting" class="section level4">
+<h4>Checking some variables of interest for plotting:</h4>
+<pre class="r"><code># are there equal numbers of benign and malignant classes?
+summary(BreastCancer$Class)</code></pre>
+<pre><code>##    benign malignant 
+##       458       241</code></pre>
+<pre class="r"><code># what about the distribution of values for thickness, adhesion, and cell size?
+summary(BreastCancer$Cl.thickness)</code></pre>
+<pre><code>##   1   2   3   4   5   6   7   8   9  10 
+## 145  50 108  80 130  34  23  46  14  69</code></pre>
+<pre class="r"><code>summary(BreastCancer$Marg.adhesion)</code></pre>
+<pre><code>##   1   2   3   4   5   6   7   8   9  10 
+## 407  58  58  33  23  22  13  25   5  55</code></pre>
+<pre class="r"><code>summary(BreastCancer$Epith.c.size)</code></pre>
+<pre><code>##   1   2   3   4   5   6   7   8   9  10 
+##  47 386  72  48  39  41  12  21   2  31</code></pre>
+</div>
+<div id="transform-the-data-set" class="section level4">
+<h4>Transform the data set:</h4>
+<pre class="r"><code># I like to select just the variables I&#39;m going to use, but I typically name this something new.
+BreastCancer2 &lt;- dplyr::select(BreastCancer, Class, Cl.thickness, Marg.adhesion, Cell.size)
+
+# Now I group and tally, because I will need a count or frequency of all of the possible groups of variables and the outcome (here, Class (benign or malignant)) to make the alluvial plot.
+BreastCancer3 &lt;- BreastCancer2 %&gt;%
+  group_by(Class, Cl.thickness, Marg.adhesion, Cell.size) %&gt;%
+  tally() %&gt;%
+  spread(Class, n, fill = 0)
+
+# Here I have to say, as a newbie to gather and spread, it occured to me that I might more simply combine the previous step with the one, below, to create some nicer, cleaner code. Here is my &quot;long-hand&quot; version, for now.
+
+# Create the new frequency column and specifically group benign or malignant &quot;class&quot; as the new variable, &quot;diagnosis&quot;:
+BreastCancer4 &lt;- gather(BreastCancer3, &quot;diagnosis&quot;, &quot;frequency&quot;, 4:5)
+
+#I always use head() or View() to ensure that what I&#39;ve done is what I really intended to do. Those steps are omitted here.</code></pre>
+</div>
+<div id="make-the-alluvial-plot" class="section level4">
+<h4>Make the alluvial plot:</h4>
+<pre class="r"><code>alluvial(BreastCancer4[,1:4], freq = BreastCancer4$frequency,
+         col = ifelse(BreastCancer4$diagnosis == &quot;benign&quot;, &quot;blue&quot;, &quot;yellow&quot;),
+         border = ifelse(BreastCancer4$diagnosis == &quot;benign&quot;, &quot;blue&quot;, &quot;yellow&quot;),
+         hide = BreastCancer4$frequency == 0,
+         cex = 0.7)</code></pre>
+<p><img src="/post/2018-11-14-alluvial-plots-and-creativity-in-data-visualization_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="a-simpler-plot" class="section level4">
+<h4>A simpler plot:</h4>
+<pre class="r"><code># After creating this plot, I realized that it might be nice to go back and re-define the 3 variables (thickness, adhesion, and size) into something that could be viewed more easily. 
+
+# First, I made new variables, &quot;thick&quot;, &quot;strongly_adhesive&quot;, and &quot;large_in_size&quot; using the mutate function. The original variables Cl.thickness, Marg.adhesion, and Epith.c.size are now defined as TRUE if they are greater than 5 in the original data set (recall, each variable ranges from 1 - 10, if you take a look at the BreastCancer dataset or str(BreastCancer), above).
+BC2 &lt;- mutate(BreastCancer, thick = Cl.thickness &gt; 5, strongly_adhesive = Marg.adhesion &gt; 5, large_in_size = Epith.c.size &gt; 5)
+
+# Again, select just the variables I want.
+BC3 &lt;- dplyr::select(BC2, Class, thick, strongly_adhesive, large_in_size)
+
+BC4 &lt;- BC3 %&gt;%
+  group_by(Class, thick, strongly_adhesive, large_in_size) %&gt;%
+  tally() %&gt;%
+  spread(Class, n, fill = 0)
+
+BC5 &lt;- gather(BC4, &quot;diagnosis&quot;, &quot;frequency&quot;, 4:5)
+
+# The plot, finally!
+
+alluvial(BC5[,1:4], freq = BC5$frequency,
+         col = ifelse(BC5$diagnosis == &quot;benign&quot;, &quot;grey&quot;, &quot;red&quot;),
+         border = ifelse(BC5$diagnosis == &quot;benign&quot;, &quot;grey&quot;, &quot;red&quot;),
+         hide = BC5$frequency == 0,
+         cex = 0.7)</code></pre>
+<p><img src="/post/2018-11-14-alluvial-plots-and-creativity-in-data-visualization_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+
+    </div>
+
+    
+
+
+
+
+    
+
+
+
+
+
+
+<div class="media author-card" itemscope itemtype="http://schema.org/Person">
+  
+  <img class="portrait mr-3" src="/img/portrait.jpg" itemprop="image" alt="Avatar">
+  
+  <div class="media-body">
+    <h5 class="card-title" itemprop="name"><a href="/">Stephanie Gervasi</a></h5>
+    <h6 class="card-subtitle">Research Scientist</h6>
+    
+    <ul class="network-icon" aria-hidden="true">
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="/steph.gervasi@gmail.com" >
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://twitter.com/StephGervasi" target="_blank" rel="noopener">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://scholar.google.com/citations?user=qNNrOy4AAAAJ&amp;hl=en" target="_blank" rel="noopener">
+          <i class="ai ai-google-scholar"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://github.com/StephGervasi" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
+<div class="container">
+  <footer class="site-footer">
+  
+  <p class="powered-by">
+    <a href="/privacy/">Privacy Policy</a>
+  </p>
+  
+
+  <p class="powered-by">
+    &copy; 2018 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+</div>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "Search Results",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="/js/academic.min.2861db6bcf2db4b5eade32c795453e47.js"></script>
+
+    
+
+  </body>
+</html>
+
