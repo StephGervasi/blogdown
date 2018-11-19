@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2 on Stephanie Gervasi, PhD</title>
+    <link>/publication_types/2/</link>
+    <description>Recent content in 2 on Stephanie Gervasi, PhD</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Wed, 31 Dec 1969 19:33:38 -0500</lastBuildDate>
+    
+	<atom:link href="/publication_types/2/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Sharing an environment with sick conspecifics alters the odors of healthy animals</title>
+      <link>/publication/person-re-id/</link>
+      <pubDate>Wed, 31 Dec 1969 19:33:38 -0500</pubDate>
+      
+      <guid>/publication/person-re-id/</guid>
+      <description>More detail can easily be written here using Markdown and $\rm \LaTeX$ math code.</description>
+    </item>
+    
+    <item>
+      <title>Linking ecology and epidemiology to understand predictors of mult-host responses to an emerging pathogen, the amphibian chytrid fungus</title>
+      <link>/publication/amphibs/2018-11-15-chytrid/</link>
+      <pubDate>Wed, 31 Dec 1969 19:33:37 -0500</pubDate>
+      
+      <guid>/publication/amphibs/2018-11-15-chytrid/</guid>
+      <description>More detail can easily be written here using Markdown and $\rm \LaTeX$ math code.</description>
+    </item>
+    
+    <item>
+      <title>Stress hormones predict a superspreader phenotype in the West Nile virus system</title>
+      <link>/publication/wnv/2018-11-15-stress-hormones-predict-a-host-superspreader-phenotype-in-the-west-nile-virus-system/</link>
+      <pubDate>Wed, 31 Dec 1969 19:33:37 -0500</pubDate>
+      
+      <guid>/publication/wnv/2018-11-15-stress-hormones-predict-a-host-superspreader-phenotype-in-the-west-nile-virus-system/</guid>
+      <description>More detail can easily be written here using Markdown and $\rm \LaTeX$ math code.</description>
+    </item>
+    
+    <item>
+      <title>Host stress hormones alter vector feeding preferences, success, and productivity</title>
+      <link>/publication/clothing-search/</link>
+      <pubDate>Wed, 31 Dec 1969 19:33:36 -0500</pubDate>
+      
+      <guid>/publication/clothing-search/</guid>
+      <description>More detail can easily be written here using Markdown and $\rm \LaTeX$ math code.</description>
+    </item>
+    
+  </channel>
+</rss>
